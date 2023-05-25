@@ -12,7 +12,7 @@ const ModelDialog = ({ handleClick }) => {
         <div className="relative">
           <div className="absolute top-0 right-0 m-3">
             <Image
-              src="/../public/close.png"
+              src="/static/close.png"
               alt="Cross Icon"
               className="cursor-pointer"
               onClick={() => handleClick(false)}

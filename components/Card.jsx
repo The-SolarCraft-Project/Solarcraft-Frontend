@@ -57,7 +57,7 @@ const Card = ({ name, price, image, file }) => {
       <h1 className="mx-2 mt-1 text-lg">NFT Name: {name}</h1>
       <h1 className="mx-2 text-lg flex flex-row">
         Price: {price}
-        <Image alt={name} src="/../public/ether.png" height={20} width={20} />
+        <Image alt={name} src="/static/ether.png" height={20} width={20} />
       </h1>
       {name === "Venus" || name === "Mars" ? (
         <button className="text-gray-500 bg-gray-100 border-2 hover:bg-gray-300 border-gray-500 rounded-xl px-5 py-1 mx-14 my-4">
@@ -72,7 +72,7 @@ const Card = ({ name, price, image, file }) => {
           <Image
             className="m-1"
             alt={name}
-            src="/../public/lightning-icon.png"
+            src="/static/lightning-icon.png"
             height={10}
             width={10}
           />

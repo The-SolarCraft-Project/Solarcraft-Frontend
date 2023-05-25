@@ -2,7 +2,7 @@ const starArray=[
     {
         name: "Sun",
         price: "0.1",
-        image: "/../public/nftImages/sun.png",
+        image: "/static/nftImages/sun.png",
         file: "https://ipfs.io/ipfs/QmYMkvLsVVjCaMf3GLed5sBhJovYWz2E3GCQ8g9XRUSyuz?filename=sun.glb",
         enable: false,
         scale: 2
@@ -13,7 +13,7 @@ const planetArray=[
     {
         name: "Mercury",
         price: "0.1",
-        image: "/../public/nftImages/mercury.png",
+        image: "/static/nftImages/mercury.png",
         file: "https://ipfs.io/ipfs/QmVtmbyXgA6rT3vJbqLJsP5BGPk75VSWU5piJnYuhy4gu1?filename=marcury.glb",
         enable: false,
         scale: 0.07,
@@ -23,7 +23,7 @@ const planetArray=[
     {
         name: "Venus",
         price: "0.1",
-        image: "/../public/nftImages/venus.png",
+        image: "/static/nftImages/venus.png",
         file: "/GLB/venus.glb",
         enable: false,
         scale: 0.18,
@@ -33,7 +33,7 @@ const planetArray=[
     {
         name: "Earth",
         price: "0.1",
-        image: "/../public/nftImages/earth.png",
+        image: "/static/nftImages/earth.png",
         file: "https://ipfs.io/ipfs/QmPEg3z9QrGfByUQQGdLDsg8WaKcSKuc5uf7YjDGhbB1hR?filename=earth.glb",
         enable: false,
         scale: 0.2,
@@ -43,7 +43,7 @@ const planetArray=[
     {
         name: "Mars",
         price: "0.1",
-        image: "/../public/nftImages/mars.png",
+        image: "/static/nftImages/mars.png",
         file: "/GLB/mars.glb",
         enable: false,
         scale: 0.14,
@@ -53,7 +53,7 @@ const planetArray=[
     {
         name: "Jupiter",
         price: "0.1",
-        image: "/../public/nftImages/jupiter.png",
+        image: "/static/nftImages/jupiter.png",
         file: "https://ipfs.io/ipfs/QmQyJpndDXjFCnVcDVyFvF796VcEpdQH6LwQn8KAoLQWMN?filename=jupiter.glb",
         enable: false,
         scale: 0.5,
@@ -63,7 +63,7 @@ const planetArray=[
     {
         name: "Saturn",
         price: "0.1",
-        image: "/../public/nftImages/saturn.png",
+        image: "/static/nftImages/saturn.png",
         file: "https://ipfs.io/ipfs/QmTSPU4NYvtuSt94uyxcZCcafaCtZvB4kBLWgStxGDjYyR?filename=saturn.glb",
         enable:false,
         scale: 0.4,
@@ -73,7 +73,7 @@ const planetArray=[
     {
         name: "Uranus",
         price: "0.1",
-        image: "/../public/nftImages/uranus.png",
+        image: "/static/nftImages/uranus.png",
         file: "https://ipfs.io/ipfs/QmWsCKzE3ow2E4oGTszqLuwyWKWrru35iGD2GExqQtk7zk?filename=uranus.glb",
         enable: false,
         scale: 0.3,
@@ -83,7 +83,7 @@ const planetArray=[
     {
         name: "Neptune",
         price: "0.1",
-        image: "/../public/nftImages/neptune.png",
+        image: "/static/nftImages/neptune.png",
         file: "https://ipfs.io/ipfs/QmcgkVJYNr46xUAHqtct6FpM7qAf5WKhxY2UM8RAByGxna?filename=neptune.glb",
         enable: false,
         scale: 0.3,
@@ -93,7 +93,7 @@ const planetArray=[
     {
         name: "Pluto",
         price: "0.1",
-        image: "/../public/nftImages/pluto.png",
+        image: "/static/nftImages/pluto.png",
         file: "https://ipfs.io/ipfs/QmcR2FfVvJYK4xDkXYvvpmYAGK6q11fge8gNaXD7AeVyqj?filename=pluto.glb",
         enable: false,
         scale: 0.05,
