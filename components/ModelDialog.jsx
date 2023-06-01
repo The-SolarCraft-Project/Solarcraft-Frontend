@@ -1,58 +1,41 @@
-import React from "react";
-import Image from "next/image";
-import Head from "next/head";
-import Card from "./Card";
-import { DataState } from "../context/DataProvider";
+import React, { useState } from "react";
+import { Dialog } from "@material-tailwind/react";
+import DialogNav from "./DialogNav";
+import Home from "./Home";
+import Mynft from "./Mynft";
+import Createnft from "./Createnft";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const ModelDialog = ({ handleClick }) => {
-  const { stars, planets } = DataState();
+const ModelDialog = ({ open, handleClick }) => {
+  const menus = ["Home", "MyNft", "CreateNft"];
+  const [switcher, setSwitcher] = useState(menus[0]);
   return (
-    <div className="fixed inset-0 bg-opacity-10 mt-20 flex items-center justify-center">
-      <div className="bg-indigo-50 p-2 rounded-2xl w-10/12 h-5/6">
-        <div className="relative">
-          <div className="absolute top-0 right-0 m-3">
-            <Image
-              src="/static/close.png"
-              alt="Cross Icon"
-              className="cursor-pointer"
-              onClick={() => handleClick(false)}
-              width={17}
-              height={17}
-            />
-          </div>
-        </div>
-        <div className="h-full overflow-y-scroll scrollbar-hide">
-          <div>
-            <h1 className="m-3 text-2xl text-blue-800">Stars</h1>
-            <div className="border-t p-0.5 ml-3 mr-20 my-0 rounded-lg bg-blue-800"></div>
-            <div className="m-5 flex flex-wrap">
-              {stars.map((star) => (
-                <Card
-                  name={star.name}
-                  price={star.price}
-                  image={star.image}
-                  file={star.file}
-                />
-              ))}
-            </div>
-          </div>
-          <div>
-            <h1 className="m-3 text-2xl text-blue-800">Planets</h1>
-            <div className="border-t p-0.5 ml-3 mr-20 my-0 rounded-lg bg-blue-800"></div>
-            <div className="m-5 flex flex-wrap">
-              {planets.map((planet) => (
-                <Card
-                  name={planet.name}
-                  price={planet.price}
-                  image={planet.image}
-                  file={planet.file}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+    <Dialog className="bg-indigo-50" open={open} size="xl">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <DialogNav
+        handleClick={handleClick}
+        menus={menus}
+        switcher={switcher}
+        setSwitcher={setSwitcher}
+      />
+      <div className="h-[500px]">
+        {switcher === menus[0] && <Home />}
+        {switcher === menus[1] && <Mynft />}
+        {switcher === menus[2] && <Createnft />}
       </div>
-    </div>
+    </Dialog>
   );
 };
 

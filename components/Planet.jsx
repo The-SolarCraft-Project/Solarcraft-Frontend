@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRef, useCallback } from "react";
 import { useFrame } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { useLoader } from "@react-three/fiber";
 import * as THREE from "three";
+import { useNFT } from "@thirdweb-dev/react";
+import { DataState } from "../context/DataProvider";
 
-const Planet = ({ file, scale, position,speed}) => {
+const Planet = ({ tokenId, scale, position, speed }) => {
+  const { basicNFT } = DataState();
+  const [object, setObject] = useState();
+  const nft = useNFT(basicNFT.contract, tokenId);
+  const [reload, setReload] = useState(true);
 
   const planetRef = useRef();
   const clockRef = new THREE.Clock();
@@ -16,16 +21,37 @@ const Planet = ({ file, scale, position,speed}) => {
     planetRef.current.position.z =
       Math.sin(clockRef.getElapsedTime() * speed) * position[0];
     planetRef.current.rotation.y += 0.01;
-  },[]);
+  }, []);
 
   useFrame(() => {
     updateEarthPosition();
   });
 
-  const gltf = useLoader(GLTFLoader, file);
+  useEffect(() => {
+    const loadGLTF = async () => {
+      if (nft.data && nft.data.metadata && nft.data.metadata.file) {
+        const gltf = await new Promise((resolve, reject) => {
+          new GLTFLoader().load(
+            nft.data.metadata.file,
+            resolve,
+            undefined,
+            reject
+          );
+        });
+        if (object !== gltf.scene && reload) {
+          console.log("object", object);
+          setObject(gltf.scene);
+          setReload(false);
+        }
+      }
+    };
+
+    loadGLTF();
+  }, [nft]);
+
   return (
     <mesh castShadow ref={planetRef} position={position} scale={scale}>
-      <primitive object={gltf.scene} />;
+      {object && <primitive object={object} />}
     </mesh>
   );
 };

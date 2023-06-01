@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ModelDialog from "./ModelDialog";
 import { DataState } from "../context/DataProvider";
-
+import { Button, Badge } from "@material-tailwind/react";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const Header = () => {
-  const { connect, address } = DataState();
+  const { withdrawProceeds, data } = DataState();
   const [open, setOpen] = React.useState(false);
+  const [proceeds, setProceeds] = React.useState(0);
+
+  useEffect(() => {
+    const decimalValue = parseInt(data?._hex, 16);
+    setProceeds(decimalValue / 1e18);
+  }, [data]);
 
   return (
     <div className="navbar z-[1] absolute top-0 left-0 w-full p-4">
@@ -14,31 +21,31 @@ const Header = () => {
           SolarCraft
         </div>
         <div className="ml-auto flex flex-row">
-          <button
-            className="bg-blue-400 text-white rounded-2xl px-5 py-2 mr-2"
-            onClick={() => setOpen(true)}
-          >
-            Mint and Add Planets
-          </button>
-          <button
-            className={
-              address
-                ? "bg-green-400 text-white rounded-2xl px-5 py-2 mr-2"
-                : "bg-blue-400 text-white rounded-2xl px-5 py-2 mr-2"
-            }
-            onClick={() => {
-              connect();
-              console.log(address);
-            }}
-          >
-            {address
-              ? address.slice(0, 5) + "......" + address.slice(-3)
-              : "Connect"}
-          </button>
-          {/* <ConnectButton moralisAuth={false} /> */}
+          {proceeds !== 0 ? (
+            <Badge withBorder>
+              <Button
+                className=" mr-2"
+                color="indigo"
+                variant="gradient"
+                onClick={() => setOpen(true)}
+              >
+                Mint and Add Planets
+              </Button>
+            </Badge>
+          ) : (
+            <Button
+              className=" mr-2"
+              color="indigo"
+              variant="gradient"
+              onClick={() => setOpen(true)}
+            >
+              Mint and Add Planets
+            </Button>
+          )}
+          <ConnectWallet />
         </div>
       </div>
-      {open && <ModelDialog handleClick={setOpen} />}
+      <ModelDialog open={open} handleClick={setOpen} />
     </div>
   );
 };
