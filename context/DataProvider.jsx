@@ -147,7 +147,7 @@ const DataProvider = ({ children }) => {
   const cancelNFT = async (tokenId) => {
     try {
       const data = await cancelListing({ args: ["0x3f7d44D6c3D574dd390d818b66d24aBb45d61b2D", tokenId] });
-      toast.success(`${tokenId} Removed`);
+      toast.success(`#${tokenId} Removed`);
       console.info("contract call successs", data);
     } catch (err) {
       console.error("contract call failure", err);

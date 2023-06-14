@@ -4,6 +4,7 @@ import { useNFT } from "@thirdweb-dev/react";
 import { DataState } from "../context/DataProvider";
 import {
   Button,
+  ButtonGroup,
   Dialog,
   DialogFooter,
   Input,
@@ -13,13 +14,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCube } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 
-const ListCard = ({ tokenId, price, seller }) => {
+const ListCard = ({ tokenId, price, seller,setRefresh }) => {
   const [open, setOpen] = useState(false);
-  const { basicNFT, convert, buyNFT, address, updateListing } = DataState();
+  const { basicNFT, convert, buyNFT, address, updateListing, cancelListing } =
+    DataState();
   const nft = useNFT(basicNFT.contract, tokenId);
   const [usd, setUsd] = useState(0);
   const [newPrice, setNewPrice] = useState("");
   const [spin, setSpin] = useState(false);
+  const [rspin, setRSpin] = useState(false);
 
   useEffect(() => {
     const getConversion = async () => {
@@ -28,7 +31,7 @@ const ListCard = ({ tokenId, price, seller }) => {
     };
     getConversion();
     console.log(seller === address.toLowerCase());
-  }, [usd,price]);
+  }, [usd, price]);
 
   const handleOpen = () => setOpen(!open);
   const handleClick = async () => {
@@ -45,6 +48,13 @@ const ListCard = ({ tokenId, price, seller }) => {
     handleOpen();
     toast.success(`#${tokenId} Updated`);
     setSpin(false);
+  };
+
+  const handleRemove = async () => {
+    setRSpin(true);
+    await cancelListing(tokenId);
+    setRefresh((prev)=>!prev);
+    setRSpin(false);
   };
 
   return (
@@ -99,14 +109,14 @@ const ListCard = ({ tokenId, price, seller }) => {
           />
         </Button>
       ) : (
-        <Button
-          className="mx-[74px] my-4"
-          variant="gradient"
-          color="indigo"
-          onClick={handleOpen}
-        >
-          <span>Update</span>
-        </Button>
+        <ButtonGroup className="my-4 mx-6" variant="gradient" color="indigo">
+          <Button onClick={handleOpen}>
+            <span>Update</span>
+          </Button>
+          <Button disabled={rspin} onClick={handleRemove}>
+            {rspin ? <Spinner color="indigo" /> : <span>Remove</span>}
+          </Button>
+        </ButtonGroup>
       )}
       <Dialog className="p-5" open={open} handler={handleOpen}>
         <Input
