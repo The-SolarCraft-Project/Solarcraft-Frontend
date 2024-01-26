@@ -11,6 +11,11 @@ import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { DataContext } from "../context";
 
+type ConversionData = {
+  _hex: string,
+  _isBigNumber: boolean,
+}
+
 const DataProvider = ({ children }: PropsWithChildren<{}>) => {
   const address = useAddress();
   const connect = useMetamask();
@@ -157,7 +162,7 @@ const DataProvider = ({ children }: PropsWithChildren<{}>) => {
 
   const convert = async (value: number) => {
     try {
-      const data = await getConversionRate({ args: [value] });
+      const data = (Object)(await getConversionRate({ args: [value] }));
       const decimalValue:number = parseInt(data._hex, 16);
       return decimalValue;
     } catch (err) {
